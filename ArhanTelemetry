@@ -1,0 +1,64 @@
+package org.firstinspires.ftc.teamcode;
+
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+
+@TeleOp(name="ArhanTelemetry")
+
+public class ArhanTelemetry extends LinearOpMode {
+    ArhanRobotConfig robotConfig = new ArhanRobotConfig();
+    String genStatus = "Hello Sid";
+    String armStatus = "Ready";
+    String driveSpeed = "Normal";
+    String turnSpeed = "Normal";
+    int timeStatus=1;
+
+    public void updateDriverWithSystemStatus(){
+        telemetry.clear();
+        telemetry.addLine();
+        telemetry.addData("Status", genStatus);
+        telemetry.addLine();
+        telemetry.addData("Arm", armStatus);
+        
+        telemetry.addLine();
+        telemetry.addData("Drive Speed", driveSpeed);
+
+        telemetry.addLine();
+        telemetry.addData("Turn Speed", turnSpeed);
+
+        telemetry.addLine();
+        telemetry.addData("Time Elapsed", timeStatus);
+
+        telemetry.update();
+    }
+        
+    @Override
+    public void runOpMode() {
+
+        robotConfig.init(hardwareMap);
+
+        /*It will display the Play button to the driver on the Driver Hub after finishing
+         the above steps.*/
+
+        //print hello to the driver on the hub
+        updateDriverWithSystemStatus();
+
+        // Wait for the game to start (driver has to press PLAY)
+        waitForStart();
+        
+        
+        int timeStatus2=0;
+        while (opModeIsActive()){
+    
+            timeStatus2=timeStatus2+1;
+            telemetry.addLine();
+            telemetry.addData("Time Elapsed", timeStatus2);
+            telemetry.update();
+        }
+
+    }
+}
+}
